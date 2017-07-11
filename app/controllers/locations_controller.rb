@@ -18,7 +18,7 @@ class LocationsController < ApplicationController
 
     # figure out which buses are nearby
     @buses.select! do |bus|
-      is_close_enough?(@location.latitude, @location.longitude, bus["LATTITUDE"], bus["LONGITUDE"])
+      is_close_enough?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])
     end
   end
 
