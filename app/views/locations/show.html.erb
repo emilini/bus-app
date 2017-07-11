@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Your Buses</h1>
+<h3 class="text-muted">Your current location</h3>
+<p class="text-muted">
+  <%= @location.full_street_address %><small>
+    <%= link_to fa_icon('pencil', text: 'Edit'), edit_location_path(@location) %>
+  </small>
+</p>
+
+<!-- get all the buses that are closest to us -->
+<h3>The Closest Buses Are</h3>
+<!-- get all buses and itierate through each one -->
+<% @buses.each do |bus| %>
+    <div class="well">
+      <p>
+      <!-- route / directino -->
+      <strong>Route: </strong><%= bus["ROUTE"] %> <%= bus["DIRECTION"] %>
+      <br>
+      <!-- bus number -->
+      <strong>Bus Number: </strong><%= bus["VEHICLE"] %>
+      <br>
+      <!-- next stop -->
+      <strong>Next Stop: </strong><%= bus["TIMEPOINT"] %>
+    </div>
+  </p>
+<% end -%>
+
+<% if @buses.empty? %>
+  <p>....Not really that close.</p>
+  <p>Sorry!</p>
+  <p>Time to walk, bike or uber. Or you can <%= link_to 'edit your location', edit_location_path(@location) %>.</p>
+<% end -%>
+<%= link_to 'Edit', edit_location_path(@location), class: 'btn btn-xs btn-default' %>
